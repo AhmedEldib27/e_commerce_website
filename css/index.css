@@ -1,0 +1,453 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('../image/background.jpg'); /* Update the path to your image file */
+    background-size: cover; /* Ensures the background image covers the entire body */
+    background-repeat: no-repeat; /* Prevents the background image from repeating */
+    min-height: 100vh;
+}
+
+nav {
+    /* background: linear-gradient(to right, grey, black); */
+    /* background-color: #000; */
+    background: linear-gradient(to right, #1c1c1b, #000);
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 2px 4px rgba(117, 117, 117, 0.2); /* Elevation effect */
+}
+
+.navTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 0px; 
+}
+
+.navItem img {
+    height: 90px; /* Adjust height as needed */
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex; 
+}
+
+.nav-links li a {
+    margin-right: 30px;
+    text-decoration: none; /* Remove underline */
+    color: #ccc;
+}
+
+.nav-links li.selected a {
+    color: #007bff; /* Color for selected item */
+}
+
+.nav-links li a:hover {
+    color: #007bff; /* Hover color */
+}
+
+
+.nav-links li:last-child {
+    margin-right: 0;
+}
+
+.hamburger-menu {
+    display: none; /* Hide hamburger menu by default */
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #ccc;
+    margin: 5px 0;
+}
+
+/*If this is deleted, the items for side drawer in small screen will be displyed on the left side on big screens*/
+@media (min-width: 769px) {
+    .side-drawer {
+        display: none;
+    }
+
+    .logo img {
+        margin-right: 15px;
+    }
+
+    .navBottom {
+        gap: 50px;
+    }
+
+    .search-result {
+        cursor: pointer;
+        padding: 10px;
+        border-bottom: 1px solid lightgray;
+        display: grid;
+        grid-template-columns: 50px 1fr;
+        grid-template-rows: 25px 25px;
+        grid-template-areas: "img name" "img price";
+        align-items: center; /* Center vertically */
+    }
+}
+
+/* Media Query for Small Screens */
+/* Existing CSS */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Hide navigation links on smaller screens */
+    }
+
+    .hamburger-menu {
+        display: block !important; /* Show hamburger menu on smaller screens */
+    }
+
+    .side-drawer {
+        text-align: center; /* Center align the navigation links */
+    }
+
+    .side-drawer .nav-links {
+        display: block;
+    }
+
+    .side-drawer .nav-links li {
+        margin-right: 0;
+    }
+
+    .side-drawer .nav-links li:first-child a {
+        color: #007bff; /* Color for the first item */
+    }
+
+    .navBottom {
+        flex-direction: column; /* Change to column layout on small screens */
+        gap: 20px; 
+        text-align: center; /* Center-align the items */
+    }
+
+    .tooltip {
+        width: 40%; /* Adjust the width for smaller screens */
+        padding: 10px; /* Increase padding for smaller screens */
+        font-size: 12px; /* Adjust font size for smaller screens */
+    }
+
+    .search-results {
+        top: 40px; /* Adjust the position of search results */
+        width: calc(100% - 20px); /* Adjust width to fit smaller screens */
+        max-height: calc(100vh - 140px); /* Limit height for smaller screens */
+        overflow-y: auto; /* Add vertical scroll for overflow */
+        border-radius: 0; /* Remove border radius */
+    }
+
+    .search-result {
+        cursor: pointer;
+        padding: 10px;
+        border-bottom: 1px solid lightgray;
+        display: grid;
+        grid-template-columns: 50px 1fr;
+        grid-template-rows: 10px 70px;
+        grid-template-areas: "img name" "img price";
+        align-items: center; /* Center vertically */
+    }
+
+    .search-result img {
+        width: 30px; /* Adjust image size for smaller screens */
+        height: 30px; /* Adjust image size for smaller screens */
+        margin-right: 10px; /* Add margin to separate image from text */
+    }
+
+    .search-result h3 {
+        flex: 1; /* Allow the title to expand to fill available space */
+        font-size: 14px; /* Adjust font size for smaller screens */
+        margin: 0; /* Remove margin to ensure proper alignment */
+    }
+
+    .search-result p {
+        font-size: 11px; /* Adjust font size for smaller screens */
+        margin: 0; /* Remove margin to ensure proper alignment */
+        flex: 1; /* Allow the paragraph to expand to fill available space */
+        /* white-space: nowrap;  */
+        overflow: hidden; /* Hide overflowing text */
+        text-overflow: ellipsis; /* Display ellipsis for overflowing text */
+    }
+}
+
+/* Add new CSS rules for the side drawer */
+.side-drawer {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #f8f9fa;
+    padding-top: 40px; /* Adjust as needed */
+    transition: left 0.3s ease;
+    background: linear-gradient(to top, grey, black); /* Gradient background */
+    z-index: 100;
+}
+
+.side-drawer.show {
+    left: 0; /* Show the drawer */
+}
+
+.side-drawer .nav-links {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px; /* Add some space between close icon and navigation links */
+}
+
+.side-drawer .nav-links li {
+    margin-right: 0;
+}
+
+.side-drawer .nav-links li a {
+    display: block;
+    padding: 10px 20px;
+    color: #ccc;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.side-drawer .nav-links li a:hover {
+    background-color: #ccc; /* Hover background color */
+    color: #000;
+}
+
+.side-drawer .nav-links li:first-child a:hover {
+    color: #007bff; /* Color for the first item */
+}
+
+.close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #ccc;
+}
+
+#search-box {
+    /* min-width: 500px; */
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    width: 50%;
+    position: relative;
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    flex-grow: 1;
+}
+
+.search-input::placeholder {
+    color: lightgray;
+}
+
+#search-icon {
+    color: #111;
+    cursor: pointer;
+    padding-right: 10px;
+}
+
+.search-results {
+    color: black;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.search-result img {
+    grid-area: img;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin: 0;
+}
+
+.search-result h3{
+    margin: 0;
+    font-size: medium;
+
+}
+.search-result p {
+    margin-top: 2px;
+    font-size: 12px;
+}
+
+.active-search {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.navBottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    cursor: pointer; /* Change cursor to hand pointer */
+}
+
+
+.sliderWrapper {
+    display: flex;
+    width: 500vw;
+    margin-bottom: 50px;
+    transition: all 0.5s ease-in-out; /* Adjust transition duration */
+    overflow: hidden; /* Hide overflow to prevent horizontal scrolling */
+}
+
+.slideBg {
+    width: 33%;
+    height: 91%;
+    border-radius: 50%; /* Ensure circular shape */
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the background color div */
+}
+
+
+.sliderItem:nth-child(1) .slideBg {
+    background-color: white;
+}
+
+.sliderItem:nth-child(2) .slideBg {
+    background-color: #314f69;
+}
+
+.sliderItem:nth-child(3) .slideBg {
+    background-color: #62aebf;
+}
+
+.sliderItem:nth-child(4) .slideBg {
+    background-color: #3ca529;
+}
+
+.sliderItem:nth-child(5) .slideBg {
+    background-color: burlywood;
+}
+
+.selectedItem {
+    color: #dfaf67;
+    font-weight: 900;
+}
+
+.sliderItem {
+    width: 100%; /* Adjusted width for better responsiveness */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.sliderImg {
+    z-index: 1; 
+    width: 35%;
+    height: 105%;
+}
+
+#slider {
+    /* background: url('imgs/background.png'); */
+    overflow: hidden;   
+}
+
+.tooltip {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    align-items: center;
+    text-align: center;
+    display: none; /* Hide by default */
+    z-index: 2;
+}
+
+.sliderItem .sliderImg:hover + .slideBg .tooltip {
+    display: block; /* Show tooltip when hovering over sliderImg */
+}
+
+
+footer {
+    background: linear-gradient(to left, #1c1c1b, #000);
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-column {
+    flex: 1;
+}
+
+.footer-column h4 {
+    margin-bottom: 10px;
+}
+
+.footer-links {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #007bff;
+}
+
+.social-icons a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: lighter;
+}
+
+.social-icons a:hover {
+    color: #007bff;
+}
+
+p {
+    font-size: 13px;
+}
